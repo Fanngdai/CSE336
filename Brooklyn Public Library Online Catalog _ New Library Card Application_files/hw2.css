@@ -1,0 +1,103 @@
+body {
+	margin:0 0 40px 0; padding:0;
+	color: #000; 
+	font:11px/16px verdana,arial,geneva,sans-serif;
+	text-align:center;
+	}
+	
+#bpl_logo {display:none}
+	
+
+#globalnav {background:#000; width:100%; height:42px; text-align:center; color:#666; border-bottom: 1px solid #333;}
+#globalnav div {margin:0 auto; width:637px; font: 12px/16px Futura, Arial, Helvetica, sans-serif !important; padding:7px 0 0}
+
+#globalnav div span.left {float: left; text-align: left; width: 39%; margin:0}
+#globalnav div span.right {float: right; text-align: right; width: 60%; margin:6px 0 0}
+
+#globalnav #logo a {background:url(../images/logo-bpl.png) no-repeat; text-indent:-9999px; display:block; width:155px; height:30px}
+
+#globalnav a:link {
+color:#999; 
+text-decoration:none;
+transition: color .3s linear;
+-webkit-transition: color .3s linear;
+-moz-transition: color .3s linear;
+}
+#globalnav a:visited, #globalnav a:active {color:#999; text-decoration:none}
+#globalnav a:hover {color:#f5f5f5; text-decoration:underline}
+
+div#content {width:630px; margin:20px auto; text-align:left}
+
+h3 {border-bottom:1px solid #ccc; font: bold 16px/18px arial,geneva,sans-serif}
+.txta {width:180px}
+.txtb {width:70px}
+.finetbl {border:1px solid #2A5F17;}
+.finetbl td {padding:6px}
+.finehdr {background:#4D8E35; font-weight:bold; color:#fff}
+
+table#rdopaytype td {padding:0 0 3px 0}
+	
+select, input, textarea {color: #000000; font-family: Arial Unicode MS, Verdana, arial, sans-serif; font-size:12px; line-height:11pt;}
+H1 {font-size:18px; font-weight: bold; color:#999999 }
+
+#print {float:right}
+
+img {border:none}
+
+a:link {color:#0000ff; text-decoration:underline}
+a:visited {color:#000099; text-decoration:underline}
+a:hover {color:#c30; text-decoration:underline}
+a:active  {color:#155fed; text-decoration:underline}
+
+.optional {color:#666; font:10px/16px verdana,arial,geneva,sans-serif;}
+#btnsubmit {margin-top:10px; font-weight:bold}
+
+#loader {background:#ffc; margin-bottom:10px; padding:6px; font-weight:bold}
+
+#lblerror {background:url(../images/stop_round.png) #FAD6D6 7px 7px no-repeat; color:#000; padding:8px 8px 8px 30px; border:1px solid #c66; margin:10px 0; display:block}
+
+table.location {margin: 0px 5px 10px 100px; width:400px; }
+.req {color:red; font-size: 12px;}
+.code {padding: 0 0 0 2px; font:bold 15px Times New Roman,Times,serif; letter-spacing:0.5px}
+#passfield {font:bold 15px Times New Roman,Times,serif; letter-spacing:0.5px}
+fieldset {margin-bottom:16px; border:1px solid #ccc; _padding-left:6px;}
+legend {font-weight:bold}
+
+fieldset#contact table {float:left}
+fieldset#contact .note {float:left; margin-left:20px; width:200px; font:10px/15px verdana,arial,geneva,sans-serif; color:#666}
+#extrazip {visibility:hidden; font:11px verdana,arial,geneva,sans-serif}
+#submit {background:#517186; color:#fff; border-right:1px solid #2c4657; border-bottom:1px solid #2c4657; border-top:1px solid #869eae; border-left:1px solid #869eae; padding:2px 5px 2px 5px; font:bold 13px arial,geneva,sans-serif; width:240px}
+noscript {color:#c30; margin-bottom:10px}
+noscript a {color:#00f}
+#F045pcode2 {float:left; margin:1px 5px 0 2px; _margin:-2px 0 0 0}
+
+/* custom size for captcha */
+
+div .LBD_CaptchaDiv
+{
+  margin-top:4px
+}
+.LBD_CaptchaDiv
+{
+  width: 164px !important
+}
+
+.LBD_CaptchaDiv .LBD_CaptchaIcons 
+{
+  width: 55px !important;
+  height: 25px !important;
+}
+
+.LBD_CaptchaDiv .LBD_CaptchaIcons a 
+{
+  display: inline !important;
+}
+
+.LBD_CaptchaDiv .LBD_CaptchaIcons a img 
+{
+  display: inline !important;
+  margin-right: 3px !important;
+}
+
+.lpush .field {margin-top:2px}
+
