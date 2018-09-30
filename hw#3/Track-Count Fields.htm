@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://www3.cs.stonybrook.edu/~cse336/Track-Fall2018.html -->
+<html><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Track-Count Fields</title>
+
+<style>
+  span.req
+  {color:red;}
+</style>
+
+<script>
+function countFields() {
+var p = document;
+var td = p.getElementsByTagName("td");
+var c = p.getElementById("fieldCount");
+var text = p.createTextNode(td.length);
+c.appendChild(text);
+}
+</script>
+
+</head>
+<body>
+<form method="post" action="http://www3.cs.stonybrook.edu/~cse336/" id="form1">
+  <div id="content">
+    <table width="640" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tbody>
+        <tr>
+          <td valign="top" class="pageMainArea"><h1>Library Card Application</h1>
+            <span id="lblheader">Complete this application and click the Submit button. You may pick up your new card at any branch library or Central Library or have the card mailed to you. In order to activate your card, you must visit your library in person and provide <a href="http://www.bklynlibrary.org/borrowing-materials#tab_acceptable_id">acceptable ID</a>. </span> <br>
+            <br>
+            <span class="req">* Required</span> <br>
+            <br>
+        <input type="button" value="Count Fields">
+        <br>
+        <p id="fieldCount">The number of td elements is </p>
+        <input type="button" onclick="countFields();" value="Count Fields" />
+
+            <fieldset>
+              <legend>Library Card</legend>
+              <table border="0" cellspacing="0" cellpadding="3" style="width: 332px">
+                <tbody>
+                  <tr>
+                    <td valign="top" style="width: 105px" nowrap="nowrap"><span class="req">*</span> Card:</td>
+                    <td colspan="3"><table id="rdotype">
+                        <tbody>
+                          <tr>
+                            <td><input id="rdotype_0" type="radio" name="rdotype" value="Young">
+                              <label for="rdotype_0">Young Adults (Ages 13 - 16)</label></td>
+                          </tr>
+                          <tr>
+                            <td><input id="rdotype_1" type="radio" name="rdotype" value="Adult">
+                              <label for="rdotype_1">Adult (Ages 17 and over)</label></td>
+                          </tr>
+                          <tr>
+                            <td><input id="rdotype_2" type="radio" name="rdotype" value="Seniors">
+                              <label for="rdotype_2">Seniors (Ages 62 and over)</label></td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td align="center" style="height: 24px"><input type="submit" name="submits" value="Submit Library Card Application" id="submits"></td>
+                </tr>
+              </tbody>
+            </table></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</form>
+
+</body></html>

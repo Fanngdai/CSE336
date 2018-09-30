@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Brooklyn Library Online Catalog | New Library Card Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <style>
+        @media only screen and (max-width: 800px) {
+            .link {
+                display: none;
+            }
+
+            .link:hover {
+                color: white !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#phone").inputmask({ "mask": "(999) 999-9999" });
+            $("#phone2").inputmask({ "mask": "(999) 999-9999" });
+        });
+        function generate() {
+            var key = "";
+            var keychar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 5; i++)
+                key += keychar.charAt(Math.floor(Math.random() * keychar.length));
+
+            document.getElementById("key").innerHTML = key;
+        }
+        window.onload = function () {
+            generate();
+        };
+    </script>
+
+    <!-- Part 1 of hw#3 -->
+    <script>
+    function countTD() {
+      var td = document.getElementsByTagName("td");
+      // var text = document.createTextNode(td.length);
+      // var id = document.getElementById("countTD");
+
+      document.getElementById("countTD").innerHTML = td.length;
+      // id.appendChild(text);
+    }
+    </script>
+
+    <!-- Part 1 of hw#3 - since there are no td, count p to show code works -->
+    <script>
+    function countP() {
+      var p = document.getElementsByTagName("p");
+      document.getElementById("countP").innerHTML = p.length;
+    }
+    </script>
+
+    <!-- Part 1 of hw#3 - since there are no td, count p to show code works -->
+    <script>
+    function countTextBox() {
+      var textBox = document.getElementsByTagName("input");
+
+      var counter = 0;
+      for(var i=0; i<textBox.length; i++) {
+        if(textBox[i].type == "text")
+          counter+=1;
+      }
+
+      document.getElementById("countTextBox").innerHTML = counter;
+    }
+    </script>
+</head>
+
+<body>
+    <div class="columns" style="height: 65px; background-color: black; color: white; font-size: 12px">
+        <div class="column is-6">
+            <img style="margin: 0 auto; display: block; margin-top: 10px" height="50" width="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Brooklyn_Public_Library_logo.svg/2000px-Brooklyn_Public_Library_logo.svg.png"
+            />
+        </div>
+        <div class="column is-6 link" style="text-align: center">
+            <a href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Homepage
+            </a>
+            <a href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Catalog
+            </a>
+            <a href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Get a Library Card
+            </a>
+        </div>
+    </div>
+    <div style="width: 35%; min-width: 500px; margin-left: auto; margin-right: auto;">
+        <h1 style="color: grey; font-size: 20px;">
+            <b>Library Card Application</b>
+        </h1>
+        <p style="font-size: 14px;">
+            Complete this application and click the Submit button. You may pick up your new card at any branch library or Central Library
+            or have the card mailed to you. In order to activate your card, you must visit your library in person and provide
+            <a>acceptable ID</a>.
+        </p>
+        </br>
+
+        <!-- Part 1 of hw#3 -->
+        <div>
+          <p>There are no td tags in our code. (Result should be 0)</p>
+          <input type="button" onclick="countTD();" value="Count TD" />
+          The number of td elements is <span id="countTD"></span>
+        </div>
+
+        <div>
+          <input type="button" onclick="countP();" value="Count P" />
+          The number of p elements is <span id="countP"></span>
+        </div>
+        <!-- end -->
+
+        <!-- Part 2 of hw#3 -->
+        <div>
+          <input type="button" onclick="countTextBox();" value="Count Text Box" />
+          The number of text boxes elements is <span id="countTextBox"></span>
+        </div>
+        <!-- end -->
+
+        </br>
+        <br />
+        <p style="color: red; font-size: 12px;">*Required</p>
+        <div class="container">
+            <div class="notification" style="max-width: 250px">
+                <h2 style="border-bottom: 1px dotted grey;">
+                    <strong>Library Card</strong>
+                </h2>
+                <div style="margin-top: 10px" class="control">
+                    <label class="radio" style="font-size: 13px;">
+                        <input type="radio" name="answer"> Young Adults (Age 13-16)
+                    </label>
+                </div>
+                <div style="margin-top: 5px" class="control">
+                    <label class="radio" style="font-size: 13px;">
+                        <input type="radio" name="answer"> Adult (Ages 17 and over)
+                    </label>
+                </div>
+                <div style="margin-top: 5px" class="control">
+                    <label class="radio" style="font-size: 13px;">
+                        <input type="radio" name="answer"> Seniors (Ages 62 and over)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Name & Mailing Address</strong>
+                </h2>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">First Name </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Middle Initial </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="Middle Initial">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Street Address </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="Street Address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">City </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Zip Code </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="Zip Code">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Last Name </span>
+                                <span style="color:red;">*</span>
+                                <input class="input is-small" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <span style="font-size: 14px">Suffix </span>
+                            <div class="control">
+                                <div class="select is-small" style="margin-top:3px;">
+
+                                    <select>
+                                        <option>Suffix</option>
+                                        <option>Jr</option>
+                                        <option>Sr</option>
+                                        <option>III</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">State </span>
+                                <input class="input is-small" type="text" value="New York" readonly>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox" style="font-size: 14px">
+                                    <input type="checkbox"> My home address is different than my mailing address.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Contact</strong>
+                </h2>
+                <div class="field">
+                    <span style="font-size: 12px">Notice Preference </span>
+                    <span style="color:red;">*</span>
+                    <div class="control">
+                        <div class="select is-small" style="margin-top:3px;">
+                            <select>
+                                <option>Email (default)</option>
+                                <option>Text Message</option>
+                                <option>Phone Call</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Email </span>
+                    <p class="control has-icons-left">
+                        <input class="input is-small" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Confirm Email </span>
+                    <p class="control has-icons-left">
+                        <input class="input is-small" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Phone Number</span>
+                    <p class="control has-icons-left">
+                        <input id="phone" class="input is-small" maxlength="14" type="tel">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Cell Number</span>
+                    <p class="control has-icons-left">
+                        <input id="phone2" class="input is-small" maxlength="14" type="tel">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox" style="font-size: 14px">
+                            <input type="checkbox"> Sign me up for library news & announcements.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Other</strong>
+                </h2>
+                <div class="field">
+                    <span style="font-size: 12px">Birth Date </span>
+                    <span style="color:red;">*</span>
+                    <div class="control">
+                        <input type="date" name="bday">
+                    </div>
+                </div>
+                <h4 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Card Delivery</strong>
+                </h4>
+                <div style="margin-top: 10px" class="control">
+                    <label class="radio" style="font-size: 12px;">
+                        <input type="radio" name="answer"> I will pick up my library card.
+                    </label>
+                </div>
+                <div style="margin-top: 5px" class="control">
+                    <label class="radio" style="font-size: 12px;">
+                        <input type="radio" name="answer"> Please mail my library card to me.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Verification</strong>
+                </h2>
+                <div style="height: 40px; margin-bottom: 10px">
+                    <div class="card" style="float: left; width: 100px; height: inherit; margin-bottom: 5px">
+                        <p id="key" style="text-align: center; line-height: 40px; color:coral"></p>
+                    </div>
+                    <a style="float: left; margin-left: 10px; height: 40px;" class="button is-small" onclick="generate()">
+                        <b>Refresh</b>
+                    </a>
+                </div>
+
+                <div class="field">
+                    <span style="font-size: 13px;">Please enter the code from the image above. </span>
+                    <p class="control">
+                        <input class="input is-small" type="text" placeholder="Verification Code">
+                    </p>
+                </div>
+                <p style="font-size: 14px">
+                    <i>By clicking the Submit button, I confirm that I have read and agree to abide by the
+                        <a href="#">policies of Brooklyn Public Library</a>.</i>
+                </p>
+                <br />
+                <a class="button is-primary">Submit Application</a>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+    <!-- Just to make sure the code works with counting the input type text, I put this here. Total of 9 input. 8 are text -->
+    <input type="button">
+
+    <footer class="footer" style="padding: 30px 15px 30px; background-color:black; color: white">
+        <div class="content has-text-centered">
+            <p>
+                <strong style="color:chartreuse">CSE 336 - Assignment 2</strong> by Nicholas Chen, Arpita Abrol, <br/>Fanny Dai, and Sophia Song.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
