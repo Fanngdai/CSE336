@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>Ajax Track Exercise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script type="text/javascript">
+      var request;
+      var dropdown;
+      var label;
+
+      function dropdownValidation() {
+          if(request.readyState == 4 && request.status==200) {
+              if(request.responseText != "ok") {
+                  label.innerHTML = "Error: No valid option selected.";
+                  label.style.color = "red";
+                  dropdown.focus();
+              } else {
+                  label.innerHTML = "Response is OK";
+                  label.style.color = "green";
+              }
+          }
+      }
+
+      function validateDropdown() {
+          dropdown = document.getElementById('dropdown');
+          label = document.getElementById('message');
+          var url="http://localhost:8080/ajax_war_exploded/servlet?preference=" + dropdown.options[dropdown.selectedIndex].text;
+          request = new XMLHttpRequest();
+          request.open("GET", url, true);
+          request.onreadystatechange = dropdownValidation;
+          request.send(null);
+      }
+  </script>
+</head>
+
+<body>
+<div class="notification" style="position: absolute; width: 100vw; top: 50%">
+  <h1 class="subtitle">Notice Preference</h1>
+  <div class="select">
+    <select id="dropdown">
+      <option></option>
+      <option>Text Message</option>
+      <option>Phone Call</option>
+      <option>Email</option>
+    </select>
+  </div>
+  <a class="button is-link" onclick="validateDropdown()">Submit</a>
+  <span id="message"></span>
+</div>
+</body>
+
+</html>

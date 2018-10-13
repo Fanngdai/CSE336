@@ -11,11 +11,12 @@
 
 <script>
 function countFields() {
-var p = document;
-var td = p.getElementsByTagName("td");
-var c = p.getElementById("fieldCount");
-var text = p.createTextNode(td.length);
-c.appendChild(text);
+  var p = document;
+  var td = p.getElementsByTagName("td");
+  var c = p.getElementById("fieldCount");
+  var text = p.createTextNode(td.length);
+  c.appendChild(text);
+  // alert(td.length);
 }
 </script>
 
@@ -28,6 +29,9 @@ c.appendChild(text);
         <tr>
           <td valign="top" class="pageMainArea"><h1>Library Card Application</h1>
             <span id="lblheader">Complete this application and click the Submit button. You may pick up your new card at any branch library or Central Library or have the card mailed to you. In order to activate your card, you must visit your library in person and provide <a href="http://www.bklynlibrary.org/borrowing-materials#tab_acceptable_id">acceptable ID</a>. </span> <br>
+
+
+
             <br>
             <span class="req">* Required</span> <br>
             <br>
@@ -62,6 +66,21 @@ c.appendChild(text);
                 </tbody>
               </table>
             </fieldset>
+
+
+
+
+          </br></br></br>
+            <div>
+                  <p>Do you need something?</p>
+                  <input type="text" name="yes" value="Enter What You want" />
+                </br>
+                  <input type="submit" />
+            </div>
+
+
+
+
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tbody>
                 <tr>
@@ -70,12 +89,9 @@ c.appendChild(text);
               </tbody>
             </table></td>
         </tr>
-
       </tbody>
     </table>
   </div>
-
-
 </form>
 
 </body></html>
