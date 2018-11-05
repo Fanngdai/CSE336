@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Brooklyn Library Online Catalog | New Library Card Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="icon" href="https://seeklogo.com/images/I/initial-b-logo-85CD6C35F8-seeklogo.com.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <style>
+        @media only screen and (max-width: 800px) {
+            .link {
+                display: none;
+            }
+
+            .href:hover {
+                color: white !important;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"> </script>
+    <script type="text/javascript">
+        function generate() {
+            var key = "";
+            var keychar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 5; i++)
+                key += keychar.charAt(Math.floor(Math.random() * keychar.length));
+
+            document.getElementById("key").innerHTML = key;
+        }
+        window.onload = function () {
+            generate();
+        };
+        var req;
+        function getCard() {
+            c = document.getElementById("cardno").value;
+            l = document.getElementById("lastname").value;
+            var url = "http://localhost:8080/CSE336-Services/webresources/checkcard?cardno=" + c + "&lastname=" + l;
+            req = new XMLHttpRequest();
+            req.open("GET", url, true);
+            req.onreadystatechange = update;
+            req.send(null);
+        }
+        function maxLengthCheck(object) {
+            if (object.value.length > object.max.length)
+                object.value = object.value.slice(0, object.max.length)
+        }
+        function update() {
+            if (req.readyState == 4 && req.status == 200) {
+                if (req.responseText != null) {
+                    var newWindow = window.open();
+                    newWindow.document.write(req.responseText);
+                }
+            } else if (req.readyState == 4 && req.status == 204) {
+                alert("No information is available for this card number and last name. Please enter additional information.");
+            }
+        }
+
+        //jquery
+        $(document).ready(function() {
+            $("#cardno").blur(function(event) {
+                var url = "http://localhost:8080/CSE336-Services/webresources/checkcard?cardno=" + $(this).val();
+                $.get(url, function(data, status, jqXHR) {
+                    console.log(jqXHR.responseJSON);
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#submit").click(function(event) {
+                var url = "http://localhost:8080/CSE336-Services/webresources/checkcard?cardno=" + document.getElementById("cardno").value + "&lastname=" + document.getElementById("lastname").value;
+                $.get(url, function(data, status, jqXHR) {
+                    var respJSON = jqXHR.responseJSON;
+                    if(respJSON != undefined) {
+                        var ageSelector = respJSON.ageRange;
+                        document.getElementById(ageSelector).checked = true;
+                        document.getElementById("firstName").value = respJSON.firstName;
+                        document.getElementById("streetAddress").value = respJSON.streetAddress;
+                        document.getElementById("city").value = respJSON.city;
+                        document.getElementById("zipCode").value = respJSON.zipCode;
+                        document.getElementById("suffix").value = respJSON.suffix;
+                        document.getElementById("state").value = respJSON.state;
+                        document.getElementById("middleInitial").value = respJSON.middleInitial;
+                        if(respJSON.homeDiff == true) {
+                            document.getElementById("homeDiff").checked = true;
+                        }
+                        document.getElementById("noticePref").value = respJSON.noticePref;
+                        document.getElementById("email").value = respJSON.email ? respJSON.email : "";
+                        document.getElementById("confirmemail").value = respJSON.email ? respJSON.email : "";
+                        document.getElementById("phoneNumber").value = respJSON.phoneNumber ? respJSON.phoneNumber : "";
+                        document.getElementById("cellNumber").value = respJSON.cellNumber ? respJSON.cellNumber : "";
+                        if(respJSON.signedUp == true) {
+                            document.getElementById("signedUp").checked = true;
+                        }
+                        document.getElementById("birthDate").value = respJSON.birthDate.split(/\//).reverse().join('-');
+                        if(respJSON.mailCard == true) {
+                            document.getElementById("mail").checked = true;
+                        } else {
+                            document.getElementById("pickup").checked = true;
+                        }
+                    } else {
+                        alert("No information is available for this combination. (Done by JQuery)");
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="columns" style="height: 65px; background-color: black; color: white; font-size: 12px">
+        <div class="column is-6">
+            <img style="margin: 0 auto; display: block; margin-top: 10px" height="50" width="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Brooklyn_Public_Library_logo.svg/2000px-Brooklyn_Public_Library_logo.svg.png"
+            />
+        </div>
+        <div class="column is-6 link" style="text-align: center">
+            <a class="href" href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Homepage
+            </a>
+            <a class="href" href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Catalog
+            </a>
+            <a class="href" href="#" style="margin: auto 5px auto 5px; line-height: 50px">
+                Get a Library Card
+            </a>
+        </div>
+    </div>
+    <div style="width: 35%; min-width: 500px; margin-left: auto; margin-right: auto;">
+        <h1 style="color: grey; font-size: 20px;">
+            <b>Library Card Application</b>
+        </h1>
+        <p style="font-size: 14px;">
+            Complete this application and click the Submit button. You may pick up your new card at any branch library or Central Library
+            or have the card mailed to you. In order to activate your card, you must visit your library in person and provide
+            <a>acceptable ID</a>.
+        </p>
+        <br />
+        <p style="color: red; font-size: 12px;">*Required</p>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey;">
+                    <strong>Library Card</strong>
+                </h2>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="control">
+                            <span style="font-size: 14px">Card Number </span>
+                            <span style="color:red; font-size: 12px">*3 digits</span>
+                            <input id="cardno" max="999" min="1" oninput="maxLengthCheck(this)" class="input is-small" type="number" placeholder="Card Number">
+                        </div>
+                        <span style="color: red; font-size: 11px;">*Get JSON</span>
+                        <br />
+                        <a id="submit" class="button is-info">Submit Card</a>
+                    </div>
+                    <div class="column is-6">
+                        <div style="margin-top: 10px" class="control">
+                            <label class="radio" style="font-size: 13px;">
+                                <input id="Young Adults (Age 13-16)" type="radio" name="answer"> Young Adults (Age 13-16)
+                            </label>
+                        </div>
+                        <div style="margin-top: 5px" class="control">
+                            <label class="radio" style="font-size: 13px;">
+                                <input id="Adult (Ages 17 and over)" type="radio" name="answer"> Adult (Ages 17 and over)
+                            </label>
+                        </div>
+                        <div style="margin-top: 5px" class="control">
+                            <label class="radio" style="font-size: 13px;">
+                                <input id="Seniors (Ages 62 and over)" type="radio" name="answer"> Seniors (Ages 62 and over)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Name & Mailing Address</strong>
+                </h2>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">First Name </span>
+                                <span style="color:red;">*</span>
+                                <input id="firstName" class="input is-small" type="text" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Middle Initial </span>
+                                <span style="color:red;">*</span>
+                                <input id="middleInitial" class="input is-small" type="text" placeholder="Middle Initial">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Street Address </span>
+                                <span style="color:red;">*</span>
+                                <input id="streetAddress" class="input is-small" type="text" placeholder="Street Address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">City </span>
+                                <span style="color:red;">*</span>
+                                <input id="city" class="input is-small" type="text" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Zip Code </span>
+                                <span style="color:red;">*</span>
+                                <input id="zipCode" class="input is-small" type="text" placeholder="Zip Code">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">Last Name </span>
+                                <span style="color:red;">*</span>
+                                <input id="lastname" class="input is-small" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <span style="font-size: 14px">Suffix </span>
+                            <div class="control">
+                                <div class="select is-small" style="margin-top:3px;">
+
+                                    <select id="suffix">
+                                        <option>Suffix</option>
+                                        <option>Jr</option>
+                                        <option>Sr</option>
+                                        <option>III</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <span style="font-size: 14px">State </span>
+                                <input id="state" class="input is-small" type="text" value="New York" readonly>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox" style="font-size: 14px">
+                                    <input id="homeDiff" type="checkbox"> My home address is different than my mailing address.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Contact</strong>
+                </h2>
+                <div class="field">
+                    <span style="font-size: 12px">Notice Preference </span>
+                    <span style="color:red;">*</span>
+                    <div class="control">
+                        <div class="select is-small" style="margin-top:3px;">
+                            <select id="noticePref">
+                                <option>Email (default)</option>
+                                <option>Text Message</option>
+                                <option>Phone Call</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Email </span>
+                    <p class="control has-icons-left">
+                        <input id="email" class="input is-small" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Confirm Email </span>
+                    <p class="control has-icons-left">
+                        <input id="confirmemail" class="input is-small" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Phone Number</span>
+                    <p class="control has-icons-left">
+                        <input id="phoneNumber" class="input is-small" maxlength="14" type="tel">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                </div>
+                <div class="field">
+                    <span style="font-size: 12px">Cell Number</span>
+                    <p class="control has-icons-left">
+                        <input id="cellNumber" class="input is-small" maxlength="14" type="tel">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox" style="font-size: 14px">
+                            <input id="signedUp" type="checkbox"> Sign me up for library news & announcements.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Other</strong>
+                </h2>
+                <div class="field">
+                    <span style="font-size: 12px">Birth Date </span>
+                    <span style="color:red;">*</span>
+                    <div class="control">
+                        <input id="birthDate" type="date" name="bday">
+                    </div>
+                </div>
+                <h4 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Card Delivery</strong>
+                </h4>
+                <div style="margin-top: 10px" class="control">
+                    <label class="radio" style="font-size: 12px;">
+                        <input id="pickup" type="radio" name="answer2"> I will pick up my library card.
+                    </label>
+                </div>
+                <div style="margin-top: 5px" class="control">
+                    <label class="radio" style="font-size: 12px;">
+                        <input id="mail" type="radio" name="answer2"> Please mail my library card to me.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <div class="notification" style="max-width: 670px">
+                <h2 style="border-bottom: 1px dotted grey; margin-bottom: 10px">
+                    <strong>Verification</strong>
+                </h2>
+                <div style="height: 40px; margin-bottom: 10px">
+                    <div class="card" style="float: left; width: 100px; height: inherit; margin-bottom: 5px">
+                        <p id="key" style="text-align: center; line-height: 40px; color:coral"></p>
+                    </div>
+                    <a style="float: left; margin-left: 10px; height: 40px;" class="button is-small" onclick="generate()">
+                        <b>Refresh</b>
+                    </a>
+                </div>
+
+                <div class="field">
+                    <span style="font-size: 13px;">Please enter the code from the image above. </span>
+                    <p class="control">
+                        <input class="input is-small" type="text" placeholder="Verification Code">
+                    </p>
+                </div>
+                <p style="font-size: 14px">
+                    <i>By clicking the Submit button, I confirm that I have read and agree to abide by the
+                        <a href="#">policies of Brooklyn Public Library</a>.</i>
+                </p>
+                <br />
+                <a class="button is-primary" onclick="getCard()">Submit Application</a>
+            </div>
+        </div>
+        <br/>
+    </div>
+    <footer class="footer" style="padding: 30px 15px 30px; background-color:black; color: white">
+        <div class="content has-text-centered">
+            <p>
+                <strong style="color:chartreuse">CSE 336 - Assignment 5</strong> by Nicholas Chen, Arpita Abrol,
+                <br/>Fanny Dai, and Sophia Song.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
