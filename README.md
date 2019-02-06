@@ -1,3 +1,5 @@
+Taken **Fall 2018** at **Stony Brook University** with Professor **Robert Kelly**.
+
 # CSE336
 
 ### Assignment 2 - Nick
